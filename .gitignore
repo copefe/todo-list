@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.pyc
+
+# User data: never committed (in any folder, with these names)
+items.json
+categories.json
+completion_history.json
+.migration_done.json
+.schema_v2_done.json
+migration.log
+*.migration-failed-*
+# ...and the names used by older versions (schema 1)
+gorevler.json
+kategoriler.json
+tamamlama_gecmisi.json
+gorev_raporu.txt
+.gecis_tamam.json
+gecis.log
+*.gecis-hatasi-*
+*.tmp
+
+# Packaging output
+gui/build/
+gui/dist/
+gui/dist-*/
+gui/build-*/
+*.exe
+
+# Python environments and tooling
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Secrets / local config
+.env
+.env.*
+
+# Browser-test output
+test-results/
+playwright-report/
+.playwright/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Working notes and review artifacts: kept outside the repository
+findings/
+legacy/
+*-HANDOFF.md
+tasarim-profili.md

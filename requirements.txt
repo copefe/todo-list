@@ -1,0 +1,3 @@
+# Runtime dependencies. Requires Python 3.9 or newer.
+# pywebview pulls in bottle, proxy_tools and typing_extensions (and pythonnet on Windows) by itself.
+pywebview>=6.0,<7

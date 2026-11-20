@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To-Do List</title>
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+<div class="sayfa">
+
+  <div class="ust-cubuk">
+    <div class="ust-baslik" data-i18n="header.today">Bugün</div>
+    <div class="ust-alt" id="ust-alt-bilgi"></div>
+    <div class="seri-gostergesi" id="seri-gostergesi"><span class="seri-nokta"></span><span id="seri-gostergesi-metin" data-i18n="header.noStreak">Seri yok</span></div>
+    <button class="pill-btn tam-ekran-btn" id="tam-ekran-btn" title="Tam ekran aç/kapat (F11)" aria-label="Tam ekranı aç veya kapat" data-i18n-title="header.fullscreenTitle" data-i18n-aria-label="header.fullscreenAria"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 1.5H1.5V5M9 1.5h3.5V5M5 12.5H1.5V9M9 12.5h3.5V9"/></svg></button>
+  </div>
+
+  <div class="izgara">
+
+    <div class="sutun">
+      <div class="kart" id="tasks-card" data-tur="tasks">
+        <div class="kart-ust">
+          <div class="sekme-grubu" data-rol="sekmeler">
+            <div class="sekme-pil"></div>
+            <button class="sekme-btn aktif" data-sekme="active" data-i18n="tab.active">Aktif</button>
+            <button class="sekme-btn" data-sekme="done" data-i18n="tab.done">Tamamlandı</button>
+          </div>
+          <div class="duzenle-aksiyonlari" data-rol="duzenle-aksiyonlari" data-gizli>
+            <button class="pill-btn kirmizi sil-btn" data-rol="sil" title="Sil" aria-label="Sil" data-i18n-title="common.delete" data-i18n-aria-label="common.delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="cop-kapak"><path d="M3.5 6h17M9.5 6V4.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V6"/></g><path d="M5.5 9h13l-1.4 11.2a1 1 0 0 1-1 .8H7.9a1 1 0 0 1-1-.8z"/><path d="M10 12.5v5M14 12.5v5"/></svg><span class="sil-sayi"></span></button>
+            <button class="pill-btn yesil" data-rol="tamamla" data-i18n="common.complete">Tamamla</button>
+          </div>
+          <button class="cam-btn artı-btn" data-rol="ekle-ac" title="Yeni görev ekle" aria-label="Yeni görev ekle" data-i18n-title="card.addTaskTitle" data-i18n-aria-label="card.addTaskTitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="cam-btn duzenle-ikon" data-rol="duzenle-ac" title="Düzenle" aria-label="Düzenle" data-i18n-title="common.edit" data-i18n-aria-label="common.edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <button class="cam-btn bitti-ikon" data-rol="duzenle-kapat" title="Bitti" aria-label="Düzenlemeyi bitir" data-i18n-title="common.editDone" data-i18n-aria-label="common.editDoneAria" data-gizli><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        </div>
+        <div class="kart-baslik-satiri acilir" data-rol="baslik">
+          <div class="kart-baslik" data-i18n="card.tasks">Görevler</div>
+          <div class="kart-sayac" data-rol="sayac"></div>
+        </div>
+        <div class="liste-alani" data-rol="liste"></div>
+        <div class="kart-alt">
+          <div class="kart-alt-sol">
+            <button class="pill-btn kucuk" data-rol="filtre" data-i18n="filter.button">Filtrele</button>
+            <button class="pill-btn kucuk" data-rol="sirala" data-i18n="sort.button">Sırala</button>
+          </div>
+          <button class="tumunu-gor-btn" data-rol="tumunu-gor" data-i18n="card.seeAll">Tümünü gör →</button>
+        </div>
+      </div>
+
+      <div class="kart" id="routines-card" data-tur="routines">
+        <div class="kart-ust">
+          <div class="sekme-grubu" data-rol="sekmeler">
+            <div class="sekme-pil"></div>
+            <button class="sekme-btn aktif" data-sekme="active" data-i18n="tab.active">Aktif</button>
+            <button class="sekme-btn" data-sekme="done" data-i18n="tab.done">Tamamlandı</button>
+          </div>
+          <div class="duzenle-aksiyonlari" data-rol="duzenle-aksiyonlari" data-gizli>
+            <button class="pill-btn kirmizi sil-btn" data-rol="sil" title="Sil" aria-label="Sil" data-i18n-title="common.delete" data-i18n-aria-label="common.delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="cop-kapak"><path d="M3.5 6h17M9.5 6V4.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V6"/></g><path d="M5.5 9h13l-1.4 11.2a1 1 0 0 1-1 .8H7.9a1 1 0 0 1-1-.8z"/><path d="M10 12.5v5M14 12.5v5"/></svg><span class="sil-sayi"></span></button>
+            <button class="pill-btn yesil" data-rol="tamamla" data-i18n="common.complete">Tamamla</button>
+          </div>
+          <button class="cam-btn artı-btn" data-rol="ekle-ac" title="Yeni rutin ekle" aria-label="Yeni rutin ekle" data-i18n-title="card.addRoutineTitle" data-i18n-aria-label="card.addRoutineTitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="cam-btn duzenle-ikon" data-rol="duzenle-ac" title="Düzenle" aria-label="Düzenle" data-i18n-title="common.edit" data-i18n-aria-label="common.edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <button class="cam-btn bitti-ikon" data-rol="duzenle-kapat" title="Bitti" aria-label="Düzenlemeyi bitir" data-i18n-title="common.editDone" data-i18n-aria-label="common.editDoneAria" data-gizli><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        </div>
+        <div class="kart-baslik-satiri acilir" data-rol="baslik">
+          <div class="kart-baslik" data-i18n="card.routines">Rutinler</div>
+          <div class="kart-sayac" data-rol="sayac"></div>
+        </div>
+        <div class="liste-alani" data-rol="liste"></div>
+        <div class="kart-alt">
+          <div class="kart-alt-sol">
+            <button class="pill-btn kucuk" data-rol="filtre" data-i18n="filter.button">Filtrele</button>
+            <button class="pill-btn kucuk" data-rol="sirala" data-i18n="sort.button">Sırala</button>
+          </div>
+          <button class="tumunu-gor-btn" data-rol="tumunu-gor" data-i18n="card.seeAll">Tümünü gör →</button>
+        </div>
+      </div>
+
+      <div class="kart">
+        <div class="kart-ust">
+          <div class="duzenle-aksiyonlari" id="kategori-duzenle-aksiyonlari" hidden>
+            <button class="pill-btn kirmizi sil-btn" id="kategori-sil-btn" title="Sil" aria-label="Sil" data-i18n-title="common.delete" data-i18n-aria-label="common.delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="cop-kapak"><path d="M3.5 6h17M9.5 6V4.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V6"/></g><path d="M5.5 9h13l-1.4 11.2a1 1 0 0 1-1 .8H7.9a1 1 0 0 1-1-.8z"/><path d="M10 12.5v5M14 12.5v5"/></svg><span class="sil-sayi"></span></button>
+          </div>
+          <button class="cam-btn artı-btn" id="kategori-ekle-ac" title="Yeni kategori ekle" aria-label="Yeni kategori ekle" data-i18n-title="card.addCategoryTitle" data-i18n-aria-label="card.addCategoryTitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="cam-btn duzenle-ikon" id="kategori-duzenle-ac" title="Düzenle" aria-label="Düzenle" data-i18n-title="common.edit" data-i18n-aria-label="common.edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <button class="cam-btn bitti-ikon" id="kategori-duzenle-kapat" title="Bitti" aria-label="Düzenlemeyi bitir" data-i18n-title="common.editDone" data-i18n-aria-label="common.editDoneAria" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        </div>
+        <div class="kart-baslik-satiri">
+          <div class="kart-baslik" data-i18n="card.categories">Kategoriler</div>
+          <div class="kart-sayac" id="kategori-sayac"></div>
+        </div>
+        <div id="kategori-ekleme-alani" hidden style="padding:0 4px 12px">
+          <input class="metin-input" id="kategori-yeni-input" placeholder="Yeni kategori yaz ve Enter'a bas" data-i18n-placeholder="category.newPlaceholder">
+          <div class="hata-mesaji" id="kategori-hata" hidden></div>
+        </div>
+        <div class="liste-alani" id="kategori-liste"></div>
+      </div>
+    </div>
+
+    <div class="sutun">
+      <div class="saat-alani">
+        <div class="saat-zaman" id="saat-zaman"></div>
+        <div class="saat-tarih" id="saat-tarih"></div>
+      </div>
+
+      <div class="kart">
+        <div class="grafik-ust">
+          <div class="kart-baslik" data-i18n="chart.title">Tamamlama takibi</div>
+          <div class="donem-oklari">
+            <button class="cam-btn donem-ok" id="donem-onceki" title="Önceki dönem" aria-label="Önceki dönem" data-i18n-title="chart.prev" data-i18n-aria-label="chart.prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button class="cam-btn donem-ok" id="donem-sonraki" title="Sonraki dönem" aria-label="Sonraki dönem" data-i18n-title="chart.next" data-i18n-aria-label="chart.next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+          <div class="sekme-grubu" id="grafik-sekmeleri">
+            <div class="sekme-pil"></div>
+            <button class="sekme-btn aktif" data-grafik="weekly" data-i18n="chart.weekly">Haftalık</button>
+            <button class="sekme-btn" data-grafik="monthly" data-i18n="chart.monthly">Aylık</button>
+          </div>
+        </div>
+        <div class="kart-aciklama" id="grafik-aciklama"></div>
+
+        <div id="haftalik-grafik" class="bar-grafik"></div>
+        <div id="aylik-grafik" class="isi-haritasi" hidden></div>
+
+        <div class="lejant ayirici">
+          <span data-i18n="chart.legend">Tamamlanan görev + rutin</span>
+          <span class="lejant-oge"><span class="lejant-kare k0"></span>0</span>
+          <span class="lejant-oge"><span class="lejant-kare k1"></span>1–3</span>
+          <span class="lejant-oge"><span class="lejant-kare k2"></span>4–5</span>
+          <span class="lejant-oge"><span class="lejant-kare k3"></span>6+</span>
+          <span class="lejant-oge" id="lejant-gelecek" hidden><span class="lejant-kare isi-hucre gelecek"></span><span data-i18n="chart.notYet">henüz gelmedi</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sutun">
+      <div class="kart">
+        <div class="kart-baslik" style="padding:0 2px" data-i18n="streak.title">Rutin serileri</div>
+        <div class="kart-aciklama" data-i18n="streak.caption">Art arda tamamlanan döngü sayısı</div>
+        <div class="liste-alani" id="seri-liste" style="max-height:320px"></div>
+      </div>
+
+      <div class="kart">
+        <div class="kart-baslik" style="padding:0 2px" data-i18n="donut.title">Kategori dağılımı</div>
+        <div class="kart-aciklama" id="donut-aciklama"></div>
+        <div class="donut-sarici">
+          <div class="donut" id="donut-grafik">
+            <div class="donut-ic"><span class="donut-toplam" id="donut-toplam"></span><span class="donut-alt" data-i18n="donut.categorized">kategorili</span></div>
+          </div>
+        </div>
+        <div class="donut-lejant" id="donut-lejant"></div>
+        <div style="display:flex;justify-content:center">
+          <div class="sekme-grubu" id="donut-sekmeleri">
+            <div class="sekme-pil"></div>
+            <button class="sekme-btn aktif" data-donut="task" data-i18n="donut.tasksTab">Görev</button>
+            <button class="sekme-btn" data-donut="routine" data-i18n="donut.routinesTab">Rutin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="overlay" id="modal-overlay" hidden>
+    <div class="modal-kutu" id="modal-kutu">
+      <div class="modal-ust">
+        <div class="modal-baslik" id="modal-baslik"></div>
+        <div class="modal-meta" id="modal-meta"></div>
+        <div class="modal-aksiyonlar">
+          <button class="cam-btn duzenle-ikon" id="modal-duzenle-ac-btn" title="Düzenle" aria-label="Düzenle" data-i18n-title="common.edit" data-i18n-aria-label="common.edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <button class="cam-btn bitti-ikon" id="modal-duzenle-kapat-btn" title="Bitti" aria-label="Düzenlemeyi bitir" data-i18n-title="common.editDone" data-i18n-aria-label="common.editDoneAria" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+          <button class="kapat-btn" id="modal-kapat-btn" title="Kapat (Esc)" data-i18n-title="common.closeTitle" data-i18n="common.close">✕ Kapat</button>
+        </div>
+      </div>
+
+      <div class="modal-sekme-satiri">
+        <div class="sekme-grubu" id="modal-sekmeleri">
+          <div class="sekme-pil"></div>
+          <button class="sekme-btn" data-modal-sekme="active" data-i18n="tab.active">Aktif</button>
+          <button class="sekme-btn" data-modal-sekme="done" data-i18n="tab.done">Tamamlandı</button>
+          <button class="sekme-btn" data-modal-sekme="all" data-i18n="tab.all">Tümü</button>
+        </div>
+      </div>
+
+      <div class="ekleme-satiri">
+        <div class="ekleme-kutu" id="ekleme-kutu">
+          <input class="ekleme-input" id="ekleme-ad-input" placeholder="">
+          <div class="ekleme-tarih-alani" id="ekleme-tarih-alani" hidden>
+            <div class="ekleme-ust-satir">
+              <span class="ekleme-ad-onizleme" id="ekleme-ad-onizleme"></span>
+              <span class="ipucu" id="ekleme-tarih-soru"></span>
+              <button class="metin-btn" style="margin-left:auto" id="ekleme-geri-btn" data-i18n="add.editName">✎ Adı düzenle</button>
+            </div>
+            <div class="ipucu" id="ekleme-tarih-ipucu" style="padding:0 2px 8px"></div>
+            <div class="secilen-tarih" id="ekleme-secilen-tarih"></div>
+            <div class="hizli-cipler" id="ekleme-hizli-cipler"></div>
+            <div class="tekerlek-satiri" id="ekleme-tekerlekler"></div>
+            <div class="ipucu tarih-ipucu" data-i18n="add.wheelHint">↑↓ ile kaydır, sürükle ya da değere tıkla. Değiştirmek zorunda değilsin.</div>
+            <!-- Filled by app.js repeatBlockHtml("ekleme") (frequency + weekdays) -->
+            <div class="ekleme-bolum" id="ekleme-siklik-alani" hidden></div>
+            <div class="ekleme-bolum">
+              <div class="etiket-kucuk" data-i18n="add.category">Kategori</div>
+              <div class="cip-listesi" id="ekleme-kategori-cipler" style="margin-top:8px"></div>
+              <input class="metin-input" id="ekleme-kategori-yeni" placeholder="Yeni kategori yaz ve Enter'a bas" data-i18n-placeholder="category.newPlaceholder" style="margin-top:8px">
+            </div>
+            <div class="hata-mesaji" id="ekleme-hata" hidden></div>
+          </div>
+        </div>
+        <button class="ekle-btn" id="ekleme-commit-btn" data-i18n="add.next">İleri</button>
+      </div>
+
+      <div class="modal-liste" id="modal-liste"></div>
+
+      <div class="duzenle-alt-cubuk" id="modal-duzenle-cubuk" hidden>
+        <span class="secim-etiketi" id="modal-secim-etiketi"></span>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button class="pill-btn kirmizi sil-btn" id="modal-sil-btn" title="Sil" aria-label="Sil" data-i18n-title="common.delete" data-i18n-aria-label="common.delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="cop-kapak"><path d="M3.5 6h17M9.5 6V4.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V6"/></g><path d="M5.5 9h13l-1.4 11.2a1 1 0 0 1-1 .8H7.9a1 1 0 0 1-1-.8z"/><path d="M10 12.5v5M14 12.5v5"/></svg><span class="sil-sayi"></span></button>
+          <button class="pill-btn yesil" id="modal-tamamla-btn" data-i18n="common.complete">Tamamla</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="overlay" id="detay-overlay" hidden>
+    <div class="detay-kutu" id="detay-kutu"></div>
+  </div>
+
+  <div class="overlay" id="picker-overlay" hidden style="z-index:50">
+    <div class="picker-kutu" id="picker-kutu">
+      <div class="alt-sayfa-ust">
+        <div class="alt-sayfa-baslik" id="picker-baslik"></div>
+        <button class="pill-btn birincil" style="margin-left:auto" id="picker-tamam-btn" data-i18n="common.ok">Tamam</button>
+      </div>
+      <div id="picker-secenekler"></div>
+    </div>
+  </div>
+
+  <div class="grafik-ipucu" id="grafik-ipucu" role="presentation" hidden></div>
+
+  <div class="bildirim-alani" id="bildirim-alani" aria-live="polite"></div>
+
+</div>
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false">
+  <!-- Lens filter of the selection bubble (LQG-09/10/22/23; skill example ornekler/liquid-glass-mercek-v2.html). Applied to
+       the copy (.pil-kopya); coordinates are in the copy's own pixel space. The maps are generated once by app.js makeMap
+       at the bubble's full (grown) size, pill-shaped; per frame only the feImage x/y/width/height and the scales are
+       updated. Outside the map a neutral feFlood rgb(128,128,0) fills in (no shift).
+       1) shared refraction: the edge band samples from the centre side, content stretches and grows toward the edge (LQG-22)
+       1b) edge blur: the blurred copy is blended into the sharp copy with a mask that is 1 at the edge, 0 at the band end (LQG-23)
+       2) spectrum: app.js builds the 7-sample (shift → colour → sum) step here; it only disperses where the strip map is
+          non-zero, so the label in the middle stays fringe-free (LQG-09). The filter only runs while the lens is visible (drag). -->
+  <filter id="mercek" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB"
+          x="-100" y="-100" width="3000" height="500">
+    <feFlood flood-color="rgb(128,128,0)" result="notr"/>
+    <feImage id="mercek-harita" result="haritaHam" preserveAspectRatio="none"/>
+    <feComposite in="haritaHam" in2="notr" operator="over" result="harita"/>
+    <feImage id="mercek-serit" result="seritHam" preserveAspectRatio="none"/>
+    <feComposite in="seritHam" in2="notr" operator="over" result="serit"/>
+    <feDisplacementMap id="mercek-ana" in="SourceGraphic" in2="harita" scale="0" xChannelSelector="R" yChannelSelector="G" result="kG0"/>
+    <feImage id="mercek-bmaske" result="bMaske" preserveAspectRatio="none"/>
+    <feGaussianBlur id="mercek-bulanik" in="kG0" stdDeviation="0" result="kGb"/>
+    <feComposite in="kGb" in2="bMaske" operator="in" result="kenarB"/>
+    <feComposite in="kG0" in2="bMaske" operator="out" result="ortaN"/>
+    <feComposite in="kenarB" in2="ortaN" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="kG"/>
+  </filter>
+</svg>
+<script src="app.js"></script>
+</body>
+</html>

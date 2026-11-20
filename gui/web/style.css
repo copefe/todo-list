@@ -1,0 +1,857 @@
+/* Font embedded locally (for the offline .exe). License: fonts/OFL-inter.txt */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Layered flat surfaces: background < card (content cards have no glass) */
+  --yuzey-0: #080A09;
+  --yuzey-1: #131917;
+
+  /* White / black transparencies: every neutral fill, border and highlight line uses only these 5 values */
+  --beyaz-1: rgba(255, 255, 255, .06);
+  --beyaz-2: rgba(255, 255, 255, .11);
+  --beyaz-3: rgba(255, 255, 255, .20);
+  --beyaz-4: rgba(255, 255, 255, .38);
+  --siyah-1: rgba(0, 0, 0, .30);
+  --maske: #000;
+
+  /* Glass only in the modal / picker / toast: translucent fill + thin bright border + top reflection */
+  --cam-yogun: linear-gradient(160deg, rgba(58, 66, 64, .78) 0%, rgba(28, 33, 32, .82) 100%);
+  --cam-kenar: var(--beyaz-3);
+  --cam-yansima: inset 0 1px 0 var(--beyaz-3);
+  --perde: rgba(3, 5, 5, .42);
+  /* Selection bubble resting fill: the opaque equivalent of --beyaz-1 over --yuzey-1 (LQG-10, alpha 1) */
+  --pil-dolgu: #212624;
+  /* Directional specular edge of the glass bubble (LQG-02/13): main highlight top-left ≤ .6, secondary bottom-right ≤ main × .6 */
+  --balon-isik-ana: rgba(255, 255, 255, .58);
+  --balon-isik-ikincil: rgba(255, 255, 255, .30);
+  --golge-pencere: 0 40px 100px rgba(0, 0, 0, .6);
+  --golge-bildirim: 0 14px 36px rgba(0, 0, 0, .5);
+  --golge-ic: inset 0 1px 2px var(--siyah-1);
+
+  /* Glass button (arrow, plus, pencil): liquid glass, NO lens filter. Resting fill --beyaz-2 (.11: more opaque than the selection
+     bubble's glass state .06). No border line; only light: distinct at top and bottom, none on the sides (the inset shadows
+     follow the shape: they fade at the sides of the circle/pill). When pressed the shine increases and the button grows slightly. Edge light ≤ .6 (LQG-02). */
+  --cam-btn-dolgu: var(--beyaz-2);
+  --cam-btn-dolgu-basili: var(--beyaz-3);
+  --cam-btn-isik:
+    inset 0 1px 0 var(--beyaz-4), inset 0 6px 6px -6px var(--beyaz-3),
+    inset 0 -1px 0 var(--beyaz-3), inset 0 -6px 6px -6px var(--beyaz-2),
+    0 4px 14px transparent;   /* no outer shadow at rest: it must not look like a dark line at the edge; appears when pressed */
+  --cam-btn-isik-basili:
+    inset 0 1.5px 0 var(--beyaz-4), inset 0 10px 8px -8px var(--beyaz-4),
+    inset 0 -1.5px 0 var(--beyaz-4), inset 0 -10px 8px -8px var(--beyaz-3),
+    0 4px 14px var(--siyah-1);
+  --cam-btn-buyume: 1.06;   /* at most 1.08 */
+  /* Reduce transparency / more contrast: opaque fill + plain border */
+  --cam-btn-opak: var(--pil-dolgu);
+  --cam-btn-opak-basili: #2E3533;
+
+  /* Stepper buttons (− / +, like the Apple Fitness goal setting): main green, flat fill; no glass, shadow or scale */
+  --sayac-dolgu: var(--vurgu);
+  --sayac-hover: var(--vurgu-hover);
+  --sayac-basili: #3F9A84;
+  --sayac-simge: var(--vurgu-uzerinde-metin);
+
+  /* Scrollbar (like iOS Clock): total width fixed, thickening by shrinking the thumb's transparent border */
+  --kaydirma-dinlenme: var(--beyaz-3);
+  --kaydirma-aktif: var(--beyaz-4);
+
+  --kart-kenar: var(--beyaz-2);
+  --alan: var(--beyaz-1);
+  --alan-hover: var(--beyaz-2);
+  --girdi: var(--siyah-1);
+  /* Form field border: ≥ 3:1 on the background, card and modal surfaces (RNK-03) */
+  --girdi-kenar: var(--beyaz-4);
+  --ayrac: var(--beyaz-2);
+
+  /* Text (body / background 17.6:1 — range 7–18 in the dark theme, RNK-07) */
+  --metin-1: #EEF2F0;
+  --metin-2: rgba(238, 242, 240, .64);
+  --metin-3: rgba(238, 242, 240, .55);
+
+  /* Accent (sage-teal) */
+  --vurgu: #4FB39A;
+  --vurgu-hover: #6FC9B2;
+  --vurgu-zemin: rgba(79, 179, 154, .18);
+  --vurgu-zemin-2: rgba(79, 179, 154, .30);
+  --vurgu-isik: rgba(79, 179, 154, .20);
+  --vurgu-kenar: rgba(79, 179, 154, .5);
+  --vurgu-uzerinde-metin: #0B1F1A;
+  --vurgu-acik-metin: #D5F2E9;
+
+  /* Status colours */
+  --bitti-yesil: var(--donut-3);   /* Done (tick) button fill: the 3rd green of the category distribution ramp (#57C173) */
+  --bitti-yesil-basili: #4BAA65;   /* ~10% darker on hover and when pressed */
+  --basari: #3FBF6A;
+  --basari-hover: #4FD17B;
+  --basari-uzerinde-metin: #06140B;
+  --basari-zemin: rgba(63, 191, 106, .16);
+  --basari-kenar: rgba(63, 191, 106, .45);
+  --basari-acik: #A6E3BA;
+  --tehlike: #EE9A9A;
+  --tehlike-zemin: rgba(238, 154, 154, .13);
+  --tehlike-kenar: rgba(238, 154, 154, .42);
+  --tehlike-acik: #F8CFCF;
+  --seri: #FFB454;
+  --alev: #FF8C1A;
+  /* Coloured glow only on the active streak flame (and at celebration moments) */
+  --alev-kenar: rgba(255, 140, 26, .28);
+  --alev-isik: rgba(255, 140, 26, .50);
+
+  /* Data visualisation: heatmap / bar buckets (0, 1–3, 4–5, 6+): the 1st, 3rd and 5th tones of the donut ramp */
+  --isi-0: #1A1F1D;
+  --isi-1: var(--donut-1);
+  --isi-2: var(--donut-3);
+  --isi-3: var(--donut-5);
+
+  /* Sequential green ramp (OKLCH, hue fixed at ~150°): dark green to light green, lightness 0.50 → 0.92, in wide steps.
+     The darkest tone is ≥ 3:1 against the card surface. Separator between slices = card surface (2 px). */
+  --donut-1: #267543;
+  --donut-2: #3B9C5A;
+  --donut-3: #57C173;
+  --donut-4: #7FE196;
+  --donut-5: #B5F8C2;
+  --donut-diger: #686F6B;
+  --donut-bos: #232826;
+  --donut-ayirac: var(--yuzey-1);
+  --donut-ic-dolgu: rgba(14, 18, 17, .85);
+
+  /* Corner radius scale: small mark < element < row/field < card/window (BSL-07) */
+  --r-xs: 4px;
+  --r-s: 10px;
+  --r-m: 16px;
+  --r-l: 24px;
+  --r-tam: 99px;
+
+  /* Motion: Apple-style spring curves */
+  --yay: cubic-bezier(.34, 1.36, .64, 1);
+  --yumusak: cubic-bezier(.22, .8, .24, 1);
+
+  /* Type scale: consecutive ratio ≥ 1.125 (11 → 12.5 → 15 → 17 → 22 → 26, clock display size) — TIP-03.
+     11 px (--fs-etiket) only for SINGLE-word labels: bar label/count, wheel title, donut "kategorili", check mark — TIP-02 */
+  --fs-etiket: 11px;
+  --fs-meta: 12.5px;
+  --fs-govde: 15px;
+  --fs-kart-baslik: 17px;
+  --fs-baslik: 22px;
+  --fs-ust-baslik: 26px;
+  --fs-saat: 104px;
+
+  --font-govde: "Inter", system-ui, "Segoe UI", sans-serif;
+  --font-baslik: "Inter", system-ui, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--yuzey-0);
+  color: var(--metin-1);
+  font-family: var(--font-govde);
+  font-size: var(--fs-govde);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--vurgu); text-decoration: none; }
+a:hover { color: var(--vurgu-hover); }
+button { font-family: inherit; }
+::selection { background: var(--vurgu-zemin-2); }
+
+/* The bar's total width is ALWAYS 10px (no layout shift). Visible thumb: 10 − 2×3 = 4px at rest; while scrolling (JS data-kaydiriyor,
+   app.js bindScrollbars) or when hovering the thumb 10 − 2×1 = 8px and its colour lightens. It returns ~600ms after scrolling ends.
+   Thickening via border-width: background-clip: padding-box does not paint under the transparent border. */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--kaydirma-dinlenme); background-clip: padding-box;
+  border: 3px solid transparent; border-radius: var(--r-tam); min-height: 36px;
+  transition: border-width .2s var(--yumusak), background-color .2s var(--yumusak);
+}
+[data-kaydiriyor]::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {
+  background-color: var(--kaydirma-aktif); border-width: 1px;
+}
+
+.wheel::-webkit-scrollbar { display: none; }
+.wheel { scrollbar-width: none; }
+
+button:focus-visible, .satir:focus-visible, .modal-satir:focus-visible, .detay-satir:focus-visible, .wheel:focus-visible {
+  outline: 2px solid var(--vurgu); outline-offset: 2px;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(14px) scale(.965); } to { opacity: 1; transform: none; } }
+@keyframes sheetIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes bubblePop { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.14); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes morphIn { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes yuksel { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Very faint coloured light areas on the background (behind the content; also gives the modal glass something to refract) */
+.sayfa {
+  min-height: 100vh;
+  padding: 32px;
+  background:
+    radial-gradient(56% 48% at 14% -6%, var(--vurgu-isik), transparent 70%),
+    radial-gradient(48% 44% at 92% 104%, var(--basari-zemin), transparent 70%),
+    var(--yuzey-0);
+  background-attachment: fixed;
+}
+
+/* ---------- Top bar ---------- */
+
+.ust-cubuk { display: flex; align-items: baseline; gap: 16px; margin: 0 0 24px; padding: 0 4px; flex-wrap: wrap; }
+.ust-baslik { font-family: var(--font-baslik); font-size: var(--fs-ust-baslik); font-weight: 600; letter-spacing: -.028em; }
+.ust-alt { font-size: var(--fs-meta); color: var(--metin-2); }
+.seri-gostergesi { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: var(--fs-meta); color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.seri-gostergesi.var { color: var(--seri); }
+.seri-nokta { width: 7px; height: 7px; border-radius: var(--r-tam); background: var(--metin-3); }
+.seri-gostergesi.var .seri-nokta { background: var(--seri); }
+.tam-ekran-btn { width: 32px; height: 32px; padding: 0; flex: none; }
+.tam-ekran-btn svg { flex: none; width: 14px; height: 14px; }
+
+/* ---------- Grid ---------- */
+
+.izgara {
+  display: grid;
+  grid-template-columns: minmax(340px, 450px) minmax(300px, 1fr) minmax(290px, 360px);
+  gap: 20px;
+  align-items: stretch;
+}
+@media (max-width: 1100px) { .izgara { grid-template-columns: 1fr; } }
+
+.sutun { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+/* ---------- Cards ---------- */
+
+/* Content cards: flat layered surface (no glass); glass only in the modal / picker / toast */
+.kart {
+  position: relative;
+  border: 1px solid var(--kart-kenar);
+  border-radius: var(--r-l);
+  background: var(--yuzey-1);
+  padding: 16px 16px 12px;
+  animation: yuksel .55s var(--yumusak) both;
+}
+.sutun > .kart:nth-child(2) { animation-delay: .06s; }
+.sutun > .kart:nth-child(3) { animation-delay: .12s; }
+
+.kart-ust { position: relative; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; min-height: 34px; }
+/* Task/routine card top row: a single grid. Tabs ↔ Delete/Complete share the same cell (1/1), + its own column, pencil ↔ tick share a column.
+   Hiding between modes uses visibility (data-gizli), not display: the row height and the position of every element stay fixed (HRK-07). */
+.kart[data-tur] .kart-ust { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: 8px; align-items: center; }
+.kart[data-tur] .kart-ust > .sekme-grubu, .kart[data-tur] .kart-ust > .duzenle-aksiyonlari { grid-area: 1 / 1; justify-self: start; }
+.kart[data-tur] .kart-ust > .artı-btn { grid-area: 1 / 2; margin-left: 0; }
+.kart[data-tur] .kart-ust > .duzenle-ikon, .kart[data-tur] .kart-ust > .bitti-ikon { grid-area: 1 / 3; }
+[data-gizli] { visibility: hidden; opacity: 0; pointer-events: none; }
+/* The entry animation restarts when it becomes visible (triggered by the selector since there is no display transition) */
+.kart[data-tur] .duzenle-aksiyonlari, .kart[data-tur] .cam-btn.bitti-ikon { animation: none; }
+.kart[data-tur] .duzenle-aksiyonlari:not([data-gizli]) { animation: morphIn .4s var(--yay) backwards; }
+.kart[data-tur] .cam-btn.bitti-ikon:not([data-gizli]) { animation: morphIn .4s var(--yay) backwards; }
+.kart-baslik-satiri { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 8px 8px; }
+.kart-baslik-satiri.acilir { cursor: pointer; }
+.kart-baslik { font-family: var(--font-baslik); font-size: var(--fs-kart-baslik); font-weight: 600; letter-spacing: -.02em; }
+.kart-aciklama { font-size: var(--fs-meta); color: var(--metin-2); margin: 2px 4px 16px; }
+.kart-sayac { font-size: var(--fs-meta); color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.ayirici { border-top: 1px solid var(--ayrac); }
+.etiket-kucuk { font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; color: var(--metin-2); }
+.ipucu { font-size: var(--fs-meta); color: var(--metin-2); }
+
+.kart-alt { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.kart-alt-sol { display: flex; align-items: center; gap: 8px; min-width: 0; }
+/* Single-line control with ellipsis: line-height here is for vertical centring (30px − 2px border) */
+.pill-btn.kucuk { min-height: 30px; padding: 0 12px; font-size: var(--fs-meta); max-width: 150px; overflow: hidden; text-overflow: ellipsis; display: inline-block; line-height: 28px; }
+
+.tumunu-gor-btn {
+  flex: none; display: block; margin: 0; min-height: 32px; padding: 0 12px; border-radius: var(--r-tam);
+  border: 0; background: transparent; color: var(--vurgu); font-size: var(--fs-meta); cursor: pointer;
+  transition: background .25s var(--yumusak), transform .3s var(--yay);
+}
+.tumunu-gor-btn:hover { background: var(--vurgu-zemin); color: var(--vurgu-hover); }
+.tumunu-gor-btn:active { transform: scale(.95); }
+
+/* ---------- Tabs ---------- */
+
+.sekme-grubu {
+  position: relative;
+  /* Equal-width columns: the sliding pill (sekme-pil) is aligned by dividing by n. */
+  display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  padding: 4px; border: 1px solid var(--beyaz-2);
+  border-radius: var(--r-tam); background: var(--siyah-1);
+  box-shadow: var(--golge-ic);
+}
+/* Horizontal dragging on a tab belongs to the bubble; vertical scrolling stays with the page (touch) */
+.sekme-grubu { touch-action: pan-y; }
+/* Selection bubble (LQG-10/16/21, skill prototype ornekler/liquid-glass-mercek-v2.html).
+   Rest: flat and OPAQUE, BELOW the text; position from CSS (--i/--n), no JS loop runs.
+   During interaction (app.js "Draggable selection bubble") position and size are set inline every frame with spring physics;
+   while [data-canli] is set there is no CSS transition. --c: 0 = rest (opaque) … 1 = glass; it only reaches 1 on press-and-hold / drag
+   (it stays 0 on a short click and with the keyboard).
+   Layers: ::before opaque fill (1 − c) · .pil-arka clear glass tint and a single neutral outline (c) · .pil-mercek magnified
+   copy · .pil-isilti inner glow from the pressed point (c) · ::after directional specular edge (c). The .pil-* layers are added
+   by JS when turning into glass and removed when back at rest: zero filter/backdrop cost at rest.
+   Growth is done with sizes, NOT transform/scale: no ancestor of the filtered copy may have scale, otherwise Chromium
+   draws the filtered content at the wrong scale (liquid-glass.md LQG-10). */
+.sekme-pil {
+  position: absolute; top: 4px; height: calc(100% - 8px);
+  width: calc((100% - 8px) / var(--n, 2));
+  left: calc(4px + (100% - 8px) * var(--i, 0) / var(--n, 2));
+  border-radius: var(--r-tam);
+  --c: 0; --px: 50%; --isik: 135deg;
+  /* 0 3px 10px at rest (the old look), 0 6px 18px in the glass state: a single shadow that grows with the amount of glass */
+  box-shadow: 0 calc(3px + 3px * var(--c)) calc(10px + 8px * var(--c)) var(--siyah-1);
+  z-index: 0; touch-action: none;
+}
+.sekme-pil::before, .sekme-pil::after, .sekme-pil > .pil-katman {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+}
+/* Opaque fill: identical to the resting look (fill + 1px border + top reflection), dissolves when turning into glass */
+.sekme-pil::before {
+  background-color: var(--pil-dolgu); border: 1px solid var(--beyaz-3);
+  box-shadow: inset 0 1px 0 var(--beyaz-4);
+  opacity: calc(1 - var(--c));
+}
+/* Clear glass (LQG-21/10): not frosted or lit; almost the same brightness as what is behind it, with a slight dark tint.
+   Tint alpha = glass opacity × 0.1 (app.js BUBBLE.glassOpacity → --cam-opaklik). A single thin neutral outline around it. */
+.pil-arka {
+  opacity: var(--c);
+  background: rgba(0, 0, 0, calc(var(--cam-opaklik, .3) * .1));
+  -webkit-backdrop-filter: brightness(1.04) saturate(1.15); backdrop-filter: brightness(1.04) saturate(1.15);
+  box-shadow: 0 0 0 1px var(--beyaz-3);
+}
+.pil-mercek { overflow: hidden; box-shadow: inset 0 0 7px rgba(0, 0, 0, calc(.30 * var(--c))); }
+/* Inner glow: spreads from the pressed point, only while pressed/dragging (not on hover) (LQG-14) */
+.pil-isilti {
+  opacity: var(--c);
+  background: radial-gradient(70px 120% at var(--px) 50%, rgba(255, 255, 255, var(--isilti-a, .03)), rgba(255, 255, 255, 0));
+}
+/* Specular edge: 1px, directional; main highlight top-left, secondary bottom-right, fades at the vertical corners (LQG-13). --isik ±18° with speed */
+.sekme-pil::after {
+  padding: 1px; opacity: var(--c);
+  background: linear-gradient(var(--isik), var(--balon-isik-ana) 0%, var(--beyaz-1) 36%, var(--beyaz-1) 64%, var(--balon-isik-ikincil) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.sekme-grubu > .sekme-btn.aktif { cursor: grab; }
+.sekme-grubu[data-tutuluyor], .sekme-grubu[data-tutuluyor] > .sekme-btn { cursor: grabbing; user-select: none; }
+/* In the glass state the bubble rises above the text; the part of the real text under the bubble is hidden via --delik (app.js),
+   and only the magnified copy in the lens is visible in its place */
+.sekme-grubu[data-surukleniyor] .sekme-pil { z-index: 2; }
+.sekme-grubu[data-surukleniyor] > .sekme-btn { -webkit-mask-image: var(--delik, none); mask-image: var(--delik, none); }
+/* Lens copy: an aria-hidden, unfocusable copy of the bar. Magnification via font/column/padding sizes (--m), NO scale;
+   the #mercek filter (index.html) is applied to the copy. No edge mask: the neighbouring text shows bent at the end. */
+.pil-kopya {
+  position: absolute; display: grid; grid-auto-flow: column; grid-auto-columns: var(--k-sutun);
+  padding: var(--k-dolgu); filter: url(#mercek);
+}
+.pil-kopya > span {
+  display: flex; align-items: center; justify-content: center; height: var(--k-ic); white-space: nowrap;
+  font-size: var(--k-fs); font-weight: 500; color: var(--metin-2);
+}
+.pil-kopya > span[data-secili] { color: var(--metin-1); }
+/* Spectrum source: a thin light strip just inside the flat top/bottom edge, fading toward the ends; the filter splits it into 7 colour samples.
+   Its alpha is > 0 only while dispersion is on (LQG-09) */
+.pil-tayf {
+  position: absolute; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, var(--tayf-a, 0)) 26%, rgba(255, 255, 255, var(--tayf-a, 0)) 74%, rgba(255, 255, 255, 0));
+}
+/* Edge ring (off by default: not added while BUBBLE.ring is 0) */
+.pil-halka {
+  position: absolute; border-radius: var(--r-tam); pointer-events: none;
+  background: linear-gradient(var(--isik), rgba(255, 255, 255, var(--halka-a)), rgba(255, 255, 255, calc(var(--halka-a) * .35)) 40%,
+    rgba(255, 255, 255, calc(var(--halka-a) * .35)) 60%, rgba(255, 255, 255, calc(var(--halka-a) * .8)));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* ---------- Chart tooltip (custom tooltip) ---------- */
+.grafik-ipucu {
+  position: fixed; z-index: 70; left: 0; top: 0; pointer-events: none; min-width: 150px; max-width: 240px;
+  padding: 10px 14px; border-radius: var(--r-m);
+  background: var(--cam-yogun); color: var(--metin-1); border: 1px solid var(--cam-kenar);
+  backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: var(--cam-yansima), var(--golge-bildirim);
+  font-size: var(--fs-meta); line-height: 1.45; animation: fadeIn .12s ease both;
+}
+.grafik-ipucu b { display: block; font-size: var(--fs-govde); font-weight: 600; letter-spacing: -.01em; margin-bottom: 2px; }
+.grafik-ipucu .ip-sayi { display: flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
+.grafik-ipucu .ip-nokta { width: 8px; height: 8px; border-radius: var(--r-xs); flex: none; }
+.grafik-ipucu .ip-alt { color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.bar-sutun, .isi-hucre { cursor: default; }
+.bar-sutun:hover .bar, .isi-hucre:hover { filter: brightness(1.18); }
+.sekme-btn {
+  position: relative; z-index: 1;
+  border: 0; border-radius: var(--r-tam); padding: 8px 16px; font-size: var(--fs-meta); font-weight: 500; cursor: pointer; white-space: nowrap;
+  transition: color .3s ease; background: transparent; color: var(--metin-2);
+}
+.sekme-btn:hover { color: var(--metin-1); }
+.sekme-btn.aktif { color: var(--metin-1); }
+
+/* ---------- Buttons ---------- */
+
+.pill-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 32px; padding: 0 16px; border-radius: var(--r-tam);
+  border: 1px solid var(--beyaz-2); background: var(--alan); color: var(--metin-1);
+  box-shadow: inset 0 1px 0 var(--beyaz-2);
+  font-size: var(--fs-meta); font-weight: 500; cursor: pointer; white-space: nowrap;
+  transition: background .25s var(--yumusak), border-color .25s var(--yumusak), transform .35s var(--yay);
+}
+.pill-btn:hover { background: var(--alan-hover); border-color: var(--beyaz-3); }
+.pill-btn:active { transform: scale(.95); }
+.pill-btn.vurgu { border-color: var(--vurgu-kenar); background: var(--vurgu-zemin); color: var(--vurgu-acik-metin); }
+.pill-btn.birincil { border-color: transparent; background: var(--vurgu); color: var(--vurgu-uzerinde-metin); font-weight: 600; box-shadow: inset 0 1px 0 var(--beyaz-4); }
+.pill-btn.birincil:hover { background: var(--vurgu-hover); }
+.pill-btn.kirmizi { border-color: var(--tehlike-kenar); background: var(--tehlike-zemin); color: var(--tehlike-acik); margin-right: 4px; }
+.pill-btn.yesil { border-color: var(--basari-kenar); background: var(--basari-zemin); color: var(--basari-acik); }
+.pill-btn:disabled, .ekle-btn:disabled { opacity: .38; cursor: not-allowed; pointer-events: none; }
+.duzenle-aksiyonlari { display: flex; align-items: center; gap: 8px; animation: morphIn .4s var(--yay) both; }
+
+/* Glass buttons: previous/next period arrow, add (+), edit (pencil). When pressed (app.js bindGlassButtons → data-basili) they grow
+   and shine; they stay like that while held, and on release (or when the pointer is released outside the button) return within ≤ 200ms.
+   Hit area 34px (≥ 32). Focus ring from the general button:focus-visible rule. */
+.cam-btn {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 0; border-radius: var(--r-tam);
+  border: 1px solid transparent; color: var(--metin-1); cursor: pointer;
+  background-color: var(--cam-btn-dolgu);
+  box-shadow: var(--cam-btn-isik);
+  backdrop-filter: blur(6px) saturate(140%); -webkit-backdrop-filter: blur(6px) saturate(140%);
+  transition: transform .18s var(--yay), background-color .18s var(--yumusak), box-shadow .18s var(--yumusak);
+  touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.cam-btn svg { width: 16px; height: 16px; flex: none; pointer-events: none; }
+.cam-btn:hover { background-color: var(--cam-btn-dolgu-basili); }
+.cam-btn[data-basili] {
+  transform: scale(var(--cam-btn-buyume));
+  background-color: var(--cam-btn-dolgu-basili);
+  box-shadow: var(--cam-btn-isik-basili);
+}
+.cam-btn:disabled { opacity: .3; cursor: not-allowed; pointer-events: none; }
+.artı-btn { margin-left: auto; color: var(--vurgu-acik-metin); }
+
+/* Done (tick): the same 34px circle and position as the pencil; green fill, white tick */
+/* animation only 'backwards': 'both' would keep transform:none at the end and block the press growth */
+.cam-btn.bitti-ikon { background-color: var(--bitti-yesil); border-color: transparent; color: #fff; animation: morphIn .4s var(--yay) backwards; }
+.cam-btn.bitti-ikon svg { width: 21px; height: 21px; }
+/* Pencil and tick: grow noticeably while held (the shine stays on too) */
+.duzenle-ikon, .bitti-ikon { --cam-btn-buyume: 1.16; }
+.cam-btn.bitti-ikon:hover { background-color: var(--bitti-yesil-basili); }
+.cam-btn.bitti-ikon[data-basili] { background-color: var(--bitti-yesil-basili); }
+
+/* Pencil ↔ tick sit to the right of the + button (far right of kart-ust): they do not move between modes (+ is pushed right with margin-left:auto) */
+
+/* Trash (Delete): a 32 px circle (icon only) with no selection, icon + (n) pill with a selection; same height as Complete (GHY-02).
+   On hover the lid opens from its left side, hinged on the right (reference 3). Dangerous action: error colour, not primary (GHY-03). */
+.pill-btn.sil-btn { min-width: 32px; height: 32px; padding: 0; gap: 4px; }
+.pill-btn.sil-btn.dolu { padding: 0 12px 0 10px; }
+.sil-btn svg { width: 18px; height: 18px; flex: none; pointer-events: none; }
+.sil-sayi { font-variant-numeric: tabular-nums; }
+.sil-sayi:empty { display: none; }
+.cop-kapak { transform-box: view-box; transform-origin: 19px 6px; transition: transform .22s var(--yay); }
+.sil-btn:not(:disabled):hover .cop-kapak, .sil-btn:not(:disabled):focus-visible .cop-kapak { transform: translate(0, -1px) rotate(17deg); }
+@media (prefers-reduced-motion: reduce) { .cop-kapak { transition: none; } }
+
+.kapat-btn {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 16px; border-radius: var(--r-tam);
+  border: 1px solid var(--beyaz-2); background: var(--alan); color: var(--metin-1);
+  box-shadow: inset 0 1px 0 var(--beyaz-2);
+  font-size: var(--fs-meta); font-weight: 500; line-height: 1; cursor: pointer;
+  transition: background .25s var(--yumusak), transform .35s var(--yay);
+}
+.kapat-btn:hover { background: var(--alan-hover); }
+.kapat-btn:active { transform: scale(.95); }
+
+.metin-btn {
+  flex: none; min-height: 32px; padding: 0 12px; border: 0; border-radius: var(--r-tam); background: transparent;
+  color: var(--vurgu); font-size: var(--fs-meta); cursor: pointer; white-space: nowrap;
+  transition: background .25s var(--yumusak), transform .3s var(--yay);
+}
+.metin-btn:hover { background: var(--vurgu-zemin); }
+.metin-btn:active { transform: scale(.95); }
+
+/* ---------- Lists ---------- */
+
+.liste-alani { position: relative; max-height: 232px; overflow-y: auto; padding: 0 4px 8px; display: flex; flex-direction: column; gap: 2px; }
+
+.satir { display: flex; align-items: center; gap: 12px; padding: 12px 12px; border-radius: var(--r-m); cursor: pointer; transition: background .25s var(--yumusak), transform .3s var(--yay); }
+.satir:hover { background: var(--alan-hover); }
+.satir:active { transform: scale(.985); }
+.satir.pasif { cursor: default; }
+.satir.pasif:hover { background: transparent; }
+.satir.pasif:active { transform: none; }
+.nokta {
+  flex: none; position: relative; width: 18px; height: 18px; border-radius: var(--r-tam); border: 1.5px solid var(--beyaz-4);
+  background: var(--beyaz-1);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .35s var(--yay), border-color .3s ease;
+}
+.nokta.acik { border-color: var(--basari); background: var(--basari); }
+.nokta.secili { border-color: var(--vurgu); background: var(--vurgu); }
+.tik { font-size: var(--fs-etiket); line-height: 1; color: var(--basari-uzerinde-metin); animation: bubblePop .4s var(--yay) both; }
+.tik.secim-tik { color: var(--vurgu-uzerinde-metin); }
+.satir-ad { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-govde); display: flex; align-items: center; }
+.satir-ad > .ad-metin { overflow: hidden; text-overflow: ellipsis; }
+.satir-ad.bitmis { opacity: .5; text-decoration: line-through; }
+.rutin-ikon { flex: none; width: 12px; height: 12px; margin-right: 8px; color: var(--metin-2); }
+.satir-kalan { flex: none; font-size: var(--fs-meta); color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.satir-kalan.gecikti { color: var(--tehlike); }
+.satir-kalan.bitti { color: var(--basari); }
+.satir.secili-satir, .modal-satir.secili-satir { background: var(--vurgu-zemin); }
+.satir-kategori-etiket { flex: none; font-size: var(--fs-meta); padding: 4px 12px; border-radius: var(--r-tam); background: var(--vurgu-zemin); border: 1px solid var(--vurgu-zemin-2); color: var(--vurgu-acik-metin); }
+
+.bos-durum { padding: 20px 12px; text-align: center; font-size: var(--fs-meta); color: var(--metin-2); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+/* ---------- Clock ---------- */
+
+.saat-alani { align-self: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 32px 0 40px; }
+.saat-zaman {
+  font-family: var(--font-baslik); font-size: var(--fs-saat); font-weight: 200; letter-spacing: -.02em; line-height: 1;
+  color: var(--metin-1); font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 26px var(--beyaz-3), 0 0 3px var(--beyaz-2);
+}
+.saat-tarih { font-size: var(--fs-kart-baslik); font-weight: 500; letter-spacing: -.01em; color: var(--metin-2); text-shadow: 0 0 16px var(--beyaz-2); }
+
+/* ---------- Charts ---------- */
+
+.grafik-ust { position: relative; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; flex-wrap: wrap; }
+.donem-oklari { display: inline-flex; gap: 4px; margin-left: auto; }
+
+.bar-grafik { position: relative; display: flex; align-items: flex-end; gap: 12px; height: 200px; padding: 0 2px; }
+.bar-sutun { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+.bar-sayi { font-size: var(--fs-etiket); color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.bar { width: 100%; max-width: 38px; border-radius: var(--r-s); transition: height .7s var(--yay), background .4s ease, box-shadow .4s ease; }
+.bar-etiket { font-size: var(--fs-etiket); color: var(--metin-2); }
+.bar-etiket.bugun { color: var(--metin-1); font-weight: 600; }
+
+.isi-haritasi { position: relative; display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; padding: 8px 2px 0; }
+.isi-hucre { aspect-ratio: 1; border-radius: var(--r-s); transition: background .4s ease, box-shadow .4s ease; }
+.isi-hucre.gelecek { background: transparent; border: 1px dashed var(--beyaz-2); }
+
+.lejant { position: relative; margin-top: 20px; padding-top: 16px; display: flex; align-items: center; gap: 12px; font-size: var(--fs-meta); color: var(--metin-2); flex-wrap: wrap; }
+.lejant-oge { display: inline-flex; align-items: center; gap: 4px; }
+.lejant-kare { width: 11px; height: 11px; border-radius: var(--r-xs); }
+.lejant-kare.k0 { background: var(--isi-0); border: 1px solid var(--beyaz-2); }
+.lejant-kare.k1 { background: var(--isi-1); }
+.lejant-kare.k2 { background: var(--isi-2); }
+.lejant-kare.k3 { background: var(--isi-3); }
+
+.donut-sarici { position: relative; display: flex; justify-content: center; padding: 8px 0 20px; }
+/* Flat ring: no shine or glass. 2 px separator between slices (app.js creates .donut-ayirac): a radial line from the ring to the centre. */
+.donut { --donut-boyut: 204px; --halka: 48px; position: relative; width: var(--donut-boyut); height: var(--donut-boyut); border-radius: var(--r-tam); }
+.donut-ayirac {
+  position: absolute; left: 50%; top: 0; width: 2px; height: var(--halka); margin-left: -1px; pointer-events: none;
+  transform-origin: 50% calc(var(--donut-boyut) / 2); transform: rotate(var(--a, 0deg)); background: var(--donut-ayirac);
+}
+.donut-ic {
+  position: absolute; inset: var(--halka); border-radius: var(--r-tam);
+  background: var(--donut-ic-dolgu);
+  display: grid; place-items: center; align-content: center; gap: 2px;
+}
+.donut-toplam { font-family: var(--font-baslik); font-size: var(--fs-baslik); font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.donut-alt { font-size: var(--fs-etiket); color: var(--metin-2); }
+.donut-lejant { display: flex; flex-direction: column; gap: 8px; padding: 0 4px 16px; }
+.donut-lejant-satir { display: flex; align-items: center; gap: 8px; font-size: var(--fs-meta); }
+.donut-lejant-ad { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--metin-1); }
+.donut-lejant-yuzde { color: var(--metin-2); font-variant-numeric: tabular-nums; }
+.donut-renk { width: 10px; height: 10px; border-radius: var(--r-xs); flex: none; }
+
+.seri-satir { display: flex; align-items: center; gap: 12px; padding: 12px 8px; border-radius: var(--r-m); }
+.alev-kutu {
+  flex: none; width: 36px; height: 36px; border-radius: var(--r-s); display: grid; place-items: center;
+  border: 1px solid var(--beyaz-2); background: var(--alan); box-shadow: inset 0 1px 0 var(--beyaz-2);
+}
+/* Coloured glow only here: around the fire on an active streak */
+.alev-kutu.aktif { border-color: var(--alev-kenar); box-shadow: inset 0 1px 0 var(--beyaz-2), 0 0 16px var(--alev-kenar); }
+.alev-kutu.aktif svg { filter: drop-shadow(0 0 4px var(--alev-isik)) drop-shadow(0 0 9px var(--alev-kenar)); }
+.seri-sayi { font-family: var(--font-baslik); font-size: var(--fs-kart-baslik); font-weight: 600; font-variant-numeric: tabular-nums; min-width: 20px; }
+.seri-ad { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-govde); color: var(--metin-1); }
+
+/* ---------- Windows ---------- */
+
+.overlay {
+  position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 36px;
+  background: var(--perde); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+  animation: fadeIn .3s ease both; cursor: pointer;
+}
+.modal-kutu, .detay-kutu { cursor: default; }
+/* List window (Tasks/Routines): centred horizontally, NOT vertically. The top edge stays at a fixed gap (12% of the screen height,
+   between 40–120 px); the window only grows downward, so the top edge and the tab bar do not move when the tab changes. Bottom gap equals the top:
+   max-height = screen − 2 × top gap. Beyond the limit the window does not grow, only .modal-liste scrolls. Other windows (detail, picker) stay centred. */
+#modal-overlay { --modal-ust-bosluk: clamp(40px, 12dvh, 120px); place-items: start center; padding: var(--modal-ust-bosluk) 36px; }
+#modal-overlay .modal-kutu { max-height: calc(100dvh - 2 * var(--modal-ust-bosluk)); }
+.modal-kutu {
+  position: relative; width: min(700px, 100%); max-height: 84vh; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--cam-kenar); border-radius: var(--r-l);
+  background: var(--cam-yogun);
+  backdrop-filter: blur(44px) saturate(180%); -webkit-backdrop-filter: blur(44px) saturate(180%);
+  box-shadow: var(--cam-yansima), var(--golge-pencere);
+  animation: modalIn .5s var(--yay) both;
+}
+.detay-kutu {
+  position: relative; width: min(560px, 100%); max-height: 86vh; overflow-y: auto;
+  border: 1px solid var(--cam-kenar); border-radius: var(--r-l);
+  background: var(--cam-yogun);
+  backdrop-filter: blur(44px) saturate(180%); -webkit-backdrop-filter: blur(44px) saturate(180%);
+  box-shadow: var(--cam-yansima), var(--golge-pencere);
+  padding: 24px; animation: modalIn .5s var(--yay) both;
+}
+.modal-ust { position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 24px 12px; flex-wrap: wrap; }
+.modal-baslik { font-family: var(--font-baslik); font-size: var(--fs-baslik); font-weight: 600; letter-spacing: -.025em; }
+.modal-meta { font-size: var(--fs-meta); color: var(--metin-2); align-self: flex-end; padding-bottom: 4px; font-variant-numeric: tabular-nums; }
+.modal-aksiyonlar { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.modal-sekme-satiri { padding: 0 24px 16px; }
+
+.ekleme-satiri { position: relative; display: flex; gap: 8px; padding: 0 24px 16px; align-items: flex-start; }
+.ekleme-kutu {
+  flex: 1; min-width: 0; overflow: hidden; border: 1px solid var(--girdi-kenar); border-radius: var(--r-m);
+  background: var(--girdi); box-shadow: var(--golge-ic);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+/* Focus: 1px border + 1px ring = 2px, solid accent colour (≥ 4.9:1) — ERS-02 / RNK-03 */
+.ekleme-kutu:focus-within { border-color: var(--vurgu); box-shadow: var(--golge-ic), 0 0 0 1px var(--vurgu); }
+.ekleme-input {
+  width: 100%; height: 44px; padding: 0 16px; font-size: var(--fs-govde); font-family: inherit; color: var(--metin-1);
+  background: transparent; border: 0; outline: none;
+}
+.ekleme-tarih-alani { padding: 12px 16px 16px; }
+.ekleme-ust-satir { display: flex; align-items: center; gap: 8px; padding: 0 2px 8px; }
+.ekleme-ad-onizleme { font-size: var(--fs-meta); font-weight: 600; color: var(--metin-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 240px; }
+.ekleme-bolum { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--ayrac); }
+.bolum-satiri { display: flex; align-items: center; gap: 8px; }
+.metin-input {
+  width: 100%; height: 36px; padding: 0 16px; font-size: var(--fs-meta); font-family: inherit; color: var(--metin-1);
+  background: var(--girdi); border: 1px solid var(--girdi-kenar); border-radius: var(--r-tam); outline: none;
+  box-shadow: var(--golge-ic); transition: border-color .25s ease, box-shadow .25s ease;
+}
+.metin-input:focus { border-color: var(--vurgu); box-shadow: var(--golge-ic), 0 0 0 1px var(--vurgu); }
+.metin-input.kisa { width: 76px; margin-left: auto; }
+
+/* Every N days: [−] number [+]. The built-in number arrows are hidden (↑/↓ still work with the keyboard). Pressing only changes the colour (≤ 120ms);
+   no growth/shine since it is a frequently repeated action. */
+.sayac-kontrol { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; }
+.sayac-kontrol .metin-input.kisa {
+  width: 56px; margin-left: 0; padding: 0 4px; text-align: center; font-size: var(--fs-kart-baslik); font-weight: 600;
+  font-variant-numeric: tabular-nums; background: transparent; border-color: transparent; box-shadow: none;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.sayac-kontrol .metin-input.kisa:focus { border-color: var(--vurgu); box-shadow: 0 0 0 1px var(--vurgu); }
+.sayac-kontrol input[type="number"]::-webkit-inner-spin-button,
+.sayac-kontrol input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+.sayac-btn {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0;
+  border: 1px solid transparent; border-radius: var(--r-tam); background: var(--sayac-dolgu); color: var(--sayac-simge); cursor: pointer;
+  box-shadow: none; transition: background-color .12s ease; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.sayac-btn svg { width: 14px; height: 14px; pointer-events: none; }
+.sayac-btn:hover { background: var(--sayac-hover); }
+.sayac-btn:active { background: var(--sayac-basili); }
+.sayac-btn:disabled { opacity: .38; cursor: not-allowed; pointer-events: none; }
+.metin-input:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Routine repeat: frequency + weekdays ---------- */
+
+.gun-secici { display: flex; gap: 8px; margin-left: auto; }
+.gun-daire {
+  width: 34px; height: 34px; padding: 0; border-radius: var(--r-tam); flex: none;
+  border: 1px solid var(--beyaz-2); background: var(--beyaz-1); color: var(--metin-2);
+  font-size: var(--fs-meta); font-weight: 600; cursor: pointer;
+  box-shadow: inset 0 1px 0 var(--beyaz-2);
+  /* Soft ~half-second transition from dim to bright (on select and deselect) */
+  transition: background-color .5s ease, color .45s ease, border-color .5s ease, box-shadow .5s ease, opacity .3s ease, transform .35s var(--yay);
+}
+.gun-daire:hover { background: var(--beyaz-2); }
+.gun-daire:active { transform: scale(.9); }
+.gun-daire.secili {
+  background: var(--basari); border-color: var(--basari-acik); color: var(--basari-uzerinde-metin);
+  box-shadow: inset 0 1px 0 var(--beyaz-4);
+}
+.gun-daire.secili:hover { background: var(--basari-hover); }
+.gun-daire:disabled { opacity: .3; cursor: not-allowed; pointer-events: none; }
+.tekrar-not { margin-top: 8px; text-align: right; }
+.ekle-btn {
+  min-height: 44px; padding: 0 20px; border-radius: var(--r-tam); border: 0;
+  background: var(--vurgu); color: var(--vurgu-uzerinde-metin); font-size: var(--fs-meta); font-weight: 600; cursor: pointer;
+  box-shadow: inset 0 1px 0 var(--beyaz-4);
+  transition: background .25s var(--yumusak), transform .35s var(--yay);
+}
+.ekle-btn:hover { background: var(--vurgu-hover); }
+.ekle-btn:active { transform: scale(.95); }
+.ekle-btn.kucuk { min-height: 34px; padding: 0 16px; font-size: var(--fs-meta); }
+
+/* ---------- Date picker ---------- */
+
+.secilen-tarih { font-size: var(--fs-meta); color: var(--metin-1); padding: 0 2px 8px; font-variant-numeric: tabular-nums; }
+.secilen-tarih b { font-weight: 600; }
+.hizli-cipler { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 2px 12px; }
+.tarih-ipucu { padding: 8px 2px 0; text-align: center; }
+.tarih-notu { font-size: var(--fs-meta); color: var(--seri); padding: 0 2px 8px; }
+
+.tekerlek-satiri { display: flex; gap: 8px; }
+.tekerlek-kolon { position: relative; flex: 1; min-width: 0; }
+.tekerlek-baslik { text-align: center; font-size: var(--fs-etiket); letter-spacing: .05em; text-transform: uppercase; color: var(--metin-2); height: 16px; }
+.tekerlek-vurgu {
+  position: absolute; left: 0; right: 0; top: 71px; height: 38px; border-radius: var(--r-s);
+  border: 1px solid var(--beyaz-2); background: var(--beyaz-2);
+  box-shadow: inset 0 1px 0 var(--beyaz-3); pointer-events: none;
+}
+/* The scroll/settle animation is managed by app.js (makeWheel); that is why there is no scroll-snap. */
+.wheel {
+  height: 152px; overflow-y: auto; padding: 57px 0;
+  -webkit-mask-image: linear-gradient(180deg, transparent, var(--maske) 28%, var(--maske) 72%, transparent);
+  mask-image: linear-gradient(180deg, transparent, var(--maske) 28%, var(--maske) 72%, transparent);
+  cursor: grab; user-select: none; -webkit-user-select: none; border-radius: var(--r-s);
+}
+.wheel:focus-visible { outline-offset: -2px; }
+.wheel.suruklemede { cursor: grabbing; }
+.wheel-secenek {
+  height: 38px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: var(--fs-govde); font-variant-numeric: tabular-nums; color: var(--metin-2); opacity: .6;
+  transition: color .2s ease, opacity .2s ease;
+}
+.wheel-secenek.secili { color: var(--metin-1); opacity: 1; font-weight: 600; }
+
+.kategori-cip {
+  min-height: 30px; padding: 0 12px; border-radius: var(--r-tam); font-size: var(--fs-meta); font-weight: 500; cursor: pointer;
+  border: 1px solid var(--beyaz-2); background: var(--alan); color: var(--metin-1);
+  box-shadow: inset 0 1px 0 var(--beyaz-2);
+  transition: background .25s var(--yumusak), border-color .25s var(--yumusak), transform .35s var(--yay);
+}
+.kategori-cip:hover { background: var(--alan-hover); }
+.kategori-cip:active { transform: scale(.94); }
+.kategori-cip.secili { border-color: var(--vurgu-kenar); background: var(--vurgu-zemin); color: var(--vurgu-acik-metin); }
+.kategori-cip.yok { color: var(--metin-2); }
+.kategori-cip:disabled { opacity: .38; cursor: not-allowed; pointer-events: none; }
+.cip-listesi { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- Modal list ---------- */
+
+.modal-liste { position: relative; flex: 1; min-height: 0; overflow-y: auto; padding: 0 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.modal-satir {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--r-m); cursor: pointer;
+  border: 1px solid var(--beyaz-2); background: var(--alan);
+  box-shadow: inset 0 1px 0 var(--beyaz-1);
+  transition: background .25s var(--yumusak), transform .3s var(--yay);
+}
+.modal-satir:hover { background: var(--alan-hover); }
+.modal-satir:active { transform: scale(.99); }
+.modal-satir .satir-kalan { min-width: 78px; text-align: right; }
+
+.duzenle-alt-cubuk { position: relative; display: flex; align-items: center; gap: 8px; padding: 16px 24px; border-top: 1px solid var(--ayrac); background: var(--siyah-1); animation: morphIn .4s var(--yay) both; }
+.secim-etiketi { font-size: var(--fs-meta); color: var(--metin-2); }
+
+/* Filter / Sort picker window (opened from the main screen) */
+.picker-kutu {
+  width: min(460px, 100%); border: 1px solid var(--cam-kenar); border-radius: var(--r-l);
+  background: var(--cam-yogun); backdrop-filter: blur(44px) saturate(180%); -webkit-backdrop-filter: blur(44px) saturate(180%);
+  box-shadow: var(--cam-yansima), var(--golge-pencere);
+  padding: 20px 24px 24px; animation: modalIn .5s var(--yay) both; cursor: default;
+}
+.alt-sayfa-ust { display: flex; align-items: center; margin-bottom: 16px; }
+.alt-sayfa-baslik { font-family: var(--font-baslik); font-size: var(--fs-govde); font-weight: 600; letter-spacing: -.01em; }
+.secim-grubu + .secim-grubu { margin-top: 16px; }
+.secim-grubu .etiket-kucuk { margin-bottom: 8px; }
+
+/* ---------- Detail panel ---------- */
+
+.detay-ust { position: relative; display: flex; align-items: flex-start; gap: 12px; }
+.detay-baslik { font-family: var(--font-baslik); font-size: var(--fs-baslik); font-weight: 600; letter-spacing: -.025em; line-height: 1.2; margin-top: 4px; overflow-wrap: anywhere; }
+.detay-satirlari { position: relative; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.detay-satir {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--r-m);
+  border: 1px solid var(--beyaz-2); background: var(--alan); box-shadow: inset 0 1px 0 var(--beyaz-1);
+}
+.detay-satir.tiklanabilir { cursor: pointer; transition: background .25s var(--yumusak), transform .3s var(--yay); }
+.detay-satir.tiklanabilir:hover { background: var(--alan-hover); }
+.detay-satir.tiklanabilir:active { transform: scale(.992); }
+.detay-etiket { font-size: var(--fs-meta); color: var(--metin-2); min-width: 96px; }
+.detay-deger { flex: 1; min-width: 0; font-size: var(--fs-govde); font-variant-numeric: tabular-nums; }
+.detay-duzenle-alani { padding: 16px; border-radius: var(--r-m); border: 1px solid var(--vurgu-kenar); background: var(--girdi); animation: morphIn .4s var(--yay) both; }
+.detay-ad-alani { position: relative; display: flex; gap: 8px; margin-top: 12px; }
+
+.hata-mesaji { color: var(--tehlike); font-size: var(--fs-meta); padding: 8px 2px 0; }
+
+/* ---------- Toast ---------- */
+
+.bildirim-alani { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 60; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
+.bildirim {
+  min-width: 220px; max-width: 460px; padding: 12px 20px; border-radius: var(--r-tam); font-size: var(--fs-meta); font-weight: 500;
+  background: var(--cam-yogun); color: var(--metin-1); border: 1px solid var(--cam-kenar);
+  backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: var(--cam-yansima), var(--golge-bildirim); animation: morphIn .45s var(--yay) both;
+}
+.bildirim.hata { border-color: var(--tehlike-kenar); }
+.bildirim.bilgi { border-color: var(--vurgu-kenar); }
+
+.gorsel-gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* If "increase contrast" is on, secondary text and borders get stronger (RNK-15) */
+@media (prefers-contrast: more) {
+  :root {
+    --metin-2: rgba(238, 242, 240, .82);
+    --metin-3: rgba(238, 242, 240, .74);
+    --cam-kenar: var(--beyaz-4);
+    --kart-kenar: var(--beyaz-4);
+    --ayrac: var(--beyaz-4);
+    --girdi-kenar: var(--metin-1);
+    --vurgu-kenar: var(--vurgu);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  /* Selection bubble: spring, stretch, wobble and colour dispersion are turned off in app.js (direct jump); there is no CSS transition anyway */
+  /* Glass buttons: no growth or transition (the shine changes instantly); scrollbar without transition */
+  .cam-btn, .cam-btn[data-basili] { transition: none; }
+  .cam-btn[data-basili] { transform: none; }
+  ::-webkit-scrollbar-thumb { transition: none; }
+  .sayac-btn { transition: none; }
+}
+
+/* Reduce transparency / more contrast: the selection bubble stays opaque while dragging too, the lens and dispersion turn off (YZY-08, LQG-09).
+   In this case app.js never raises the amount of glass above 0 and adds no layers; this rule is a safeguard. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .sekme-pil::before { opacity: 1; }
+  .sekme-pil::after, .sekme-pil > .pil-katman { display: none; }
+  .sekme-grubu[data-surukleniyor] .sekme-pil { z-index: 0; }
+  .sekme-grubu[data-surukleniyor] > .sekme-btn { -webkit-mask-image: none; mask-image: none; }
+  /* Glass buttons: opaque fill, a plain border instead of the shine; when pressed the fill and border get stronger (YZY-08) */
+  .cam-btn {
+    background-color: var(--cam-btn-opak); border-color: var(--beyaz-4); box-shadow: none;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .cam-btn:hover { background-color: var(--cam-btn-opak-basili); }
+  .cam-btn[data-basili] { background-color: var(--cam-btn-opak-basili); border-color: var(--metin-1); box-shadow: none; }
+  .cam-btn.bitti-ikon, .cam-btn.bitti-ikon:hover, .cam-btn.bitti-ikon[data-basili] { background-color: var(--bitti-yesil); }
+}
+@media (prefers-contrast: more) {
+  :root { --kaydirma-dinlenme: var(--beyaz-4); --kaydirma-aktif: var(--metin-2); }
+  .cam-btn { border-color: var(--metin-1); }
+  .sayac-btn { border-color: var(--metin-1); }
+}
+/* Reduce transparency: glass surfaces turn into an opaque, non-frosted layer (YZY-08) */
+@media (prefers-reduced-transparency: reduce) {
+  .overlay { background: rgba(3, 5, 5, .86); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .modal-kutu, .detay-kutu, .picker-kutu, .bildirim, .grafik-ipucu { background: var(--yuzey-1); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+/* Opaque fill so glass surfaces stay readable in engines without backdrop blur support (YZY-08) */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .overlay { background: rgba(3, 5, 5, .86); }
+  .modal-kutu, .detay-kutu, .picker-kutu, .bildirim, .grafik-ipucu { background: var(--yuzey-1); }
+  .pil-arka { display: none; }
+}
+
+/* Narrow screen (≤ 520 px): side padding 16 px, the card top row wraps, the + button does not shrink (no overflow at 320 px) — BSL-08 */
+@media (max-width: 520px) {
+  .sayfa { padding: 16px; }
+  .kart-ust { flex-wrap: wrap; }
+  .artı-btn { flex: none; }
+}
+
+[hidden] { display: none !important; }

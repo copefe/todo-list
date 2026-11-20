@@ -1,0 +1,8 @@
+# Development / test / packaging dependencies.
+-r requirements.txt
+
+# Browser UI check (tests/browser/run_check.py); uses the installed Microsoft Edge.
+playwright>=1.40,<2
+
+# Building the Windows .exe (gui/To-Do List.spec)
+pyinstaller>=6.0,<7
